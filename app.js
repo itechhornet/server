@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/dist/'));
 
 // app.get('/ui', (req, res) => res.sendfile(path.join(__dirname)));
 
-app.get('/server',(req,res)=> res.send("iTech Node Server is running"));
+app.get('/server',(req,res)=> res.send("iTech Node Server is running Now"));
 
 // Listen
 var port = process.env.PORT || 8000;
