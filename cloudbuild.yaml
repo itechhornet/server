@@ -1,0 +1,10 @@
+steps:
+
+# Install node packages
+- name: node:10.16.3
+  entrypoint: npm
+  args: ['install']
+
+# Deploy to google cloud app engine
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ['app', 'deploy', '--version=prod']
