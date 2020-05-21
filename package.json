@@ -1,13 +1,45 @@
 {
-  "name": "hello-world-express",
-  "description": "Hello World test app",
-  "version": "0.0.1",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "private": true,
+  "name": "api-js-mooc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
-    "express": "3.x",
-    "jsonwebtoken": "^8.5.1"
-  }
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "joi": "^14.0.6",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.11",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.0"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.7",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  },
+  "apidoc": {
+    "title": "Mooc API"
+  },
+  "scripts": {
+    "docs": "apidoc -i ./app/routes -o ./docs",
+    "test": "eslint ./ && npm run docs",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundowndev/api-js-mooc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sundowndev/api-js-mooc/issues"
+  },
+  "homepage": "https://github.com/sundowndev/api-js-mooc#readme"
 }
