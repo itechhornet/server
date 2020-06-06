@@ -1,13 +1,14 @@
 const user = require('express').Router();
 
-const profile = require('./profile');
-const update = require('./update');
-const remove = require('./delete');
-const notes = require('./notes');
+// const profile = require('./profile');
+// const update = require('./update');
+// const remove = require('./delete');
+// const notes = require('./notes');
+//const register = require('./register');
 
-const Authentication = require.main.require('./app/validation/auth/auth');
-const UpdateValidation = require.main.require('./app/validation/user/update');
-const DeleteValidation = require.main.require('./app/validation/user/delete');
+// const Authentication = require.main.require('./app/validation/auth/auth');
+// const UpdateValidation = require.main.require('./app/validation/user/update');
+// const DeleteValidation = require.main.require('./app/validation/user/delete');
 
 /**
  * @api {get} /user/me Get account information
@@ -19,7 +20,7 @@ const DeleteValidation = require.main.require('./app/validation/user/delete');
  * @apiSuccess {String} lastname  Lastname of the User.
  * @apiSuccess {String} email  Email of the User.
  */
-user.get('/me', Authentication, profile);
+//user.get('/me', Authentication, profile);
 
 /**
   * @api {put} /user/me Update account information
@@ -38,7 +39,7 @@ user.get('/me', Authentication, profile);
   * @apiSuccess {String} lastname  Lastname of the User.
   * @apiSuccess {String} email  Email of the User.
   */
-user.put('/me', Authentication, UpdateValidation, update);
+//user.put('/me', Authentication, UpdateValidation, update);
 
 /**
  * @api {delete} /user/me Delete account
@@ -47,7 +48,7 @@ user.put('/me', Authentication, UpdateValidation, update);
  *
  * @apiParam {String} password Account password.
  */
-user.delete('/me', Authentication, DeleteValidation, remove);
+//user.delete('/me', Authentication, DeleteValidation, remove);
 
 /**
   * @api {get} /user/me/notes Get all notes
@@ -56,6 +57,9 @@ user.delete('/me', Authentication, DeleteValidation, remove);
   *
   * @apiSuccess {Array} Array Notes of the user.
   */
-user.get('/me/notes', Authentication, notes);
+//user.get('/me/notes', Authentication, notes);
+
+
+//user.post('/register',register);
 
 module.exports = user;

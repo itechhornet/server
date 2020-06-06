@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 // Require routes
 const auth = require('./auth');
 const user = require('./user');
-const note = require('./note');
 const customer = require('./customer');
 
 // configure app to use bodyParser()
@@ -24,6 +23,5 @@ routes.get('/', (req, res) => {
 
 routes.use('/auth', auth);
 routes.use('/user', user);
-routes.use('/note', note);
 routes.use('/customer', customer.create);
 module.exports = routes;

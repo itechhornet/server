@@ -24,4 +24,18 @@ User.findOne = (email, result) => {
   });
 };
 
+const UserRegister = function(customer) {
+  this.email = customer.email;
+  this.password = customer.name;
+};
+
+
+
+connection.query('INSERT INTO messages VALUES ?', post, function (err, result) {
+  // ...
+});
+
+
+
+
 module.exports = User;

@@ -6,8 +6,6 @@ module.exports = (req, res, next) => {
     password: Joi.string().required(),
   });
 
-  console.log(req.body);
-
   Joi.validate({
     email: req.body.email,
     password: req.body.password,

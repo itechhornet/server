@@ -1,36 +1,48 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-  const UserModel = mongoose.model('User');
+
+  const UserModel = require("../../models/user.model.js");
 
   const passwordHash = bcrypt.hashSync(req.body.password);
+  const secret = require.main.require('./config/secret');
 
-  const User = new UserModel({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
+
+  const userDetail = {
+    contact_name: req.body.contact_name,
+    email_address: req.body.email,
+    username: req.body.username ,
     password: passwordHash,
-  });
+    date_created : new Date()
+  };
 
-  UserModel.countDocuments({ email: req.body.email }, (err, count) => {
-    if (count !== 0) {
-      return next({
-        status: 401,
-        message: 'Email is already taken by another user.',
+
+
+  UserModel.create(userDetail, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Customer."
       });
     }
+    else{
 
-    return User.save((saveErr) => {
-      if (saveErr) {
-        return next({
-          status: 500,
-          message: 'Database error',
-          error: [saveErr],
-        });
-      }
+      const token = jwt.sign({
+        user: data,
+      }, secret, {
+        expiresIn: '3h',
+      });
 
-      return res.status(201).json({ success: true, message: 'Success' });
-    });
+      res.send({
+        success: true,
+        access_token: token,
+        user: {
+          _id: data.id,
+          username: data.username,
+          email: data.email_address,
+        },
+      });
+    }
   });
 };

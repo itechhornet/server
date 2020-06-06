@@ -1,114 +1,101 @@
 const sql = require("../db/db.connect.js");
 //constructor
-const Customer = function(customer) {
-  this.email = customer.email;
-  this.name = customer.name;
-  this.active = customer.active;
-};
-
-Customer.create = (newCustomer, result) => {
 
 
-  newCustomer.email ="SDa";
-  newCustomer.name="sads";
-  newCustomer.active="Adas";
-  sql.query("INSERT INTO customers SET ?", newCustomer, (err, res) => {
+
+
+const user = function() {};
+
+user.create = (userDetail, result) => {
+  userDetail.default_account_id =1;
+  userDetail.language= "en";
+  userDetail.comments="";
+  sql.query("INSERT INTO rv_users SET ?", userDetail, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created customer: ", { id: res.insertId, ...newCustomer });
-    result(null, { id: res.insertId, ...newCustomer });
+    console.log("created customer: ", { id: res.insertId, ...userDetail });
+    result(null, { id: res.insertId, ...userDetail });
   });
 };
 
-Customer.findById = (customerId, result) => {
-  sql.query(`SELECT * FROM customers WHERE id = ${customerId}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+module.exports = user;
 
-    if (res.length) {
-      console.log("found customer: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
+// Customer.findById = (customerId, result) => {
+//   sql.query(`SELECT * FROM customers WHERE id = ${customerId}`, (err, res) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(err, null);
+//       return;
+//     }
 
-    // not found Customer with the id
-    result({ kind: "not_found" }, null);
-  });
-};
+//     if (res.length) {
+//       console.log("found customer: ", res[0]);
+//       result(null, res[0]);
+//       return;
+//     }
 
-Customer.getAll = result => {
-  sql.query("SELECT * FROM customers", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+//     // not found Customer with the id
+//     result({ kind: "not_found" }, null);
+//   });
+// };
 
-    console.log("customers: ", res);
-    result(null, res);
-  });
-};
+// Customer.getAll = result => {
+//   sql.query("SELECT * FROM customers", (err, res) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(null, err);
+//       return;
+//     }
 
-Customer.updateById = (id, customer, result) => {
-  sql.query(
-    "UPDATE customers SET email = ?, name = ?, active = ? WHERE id = ?",
-    [customer.email, customer.name, customer.active, id],
-    (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
+//     console.log("customers: ", res);
+//     result(null, res);
+//   });
+// };
 
-      if (res.affectedRows == 0) {
-        // not found Customer with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
+// Customer.updateById = (id, customer, result) => {
+//   sql.query(
+//     "UPDATE customers SET email = ?, name = ?, active = ? WHERE id = ?",
+//     [customer.email, customer.name, customer.active, id],
+//     (err, res) => {
+//       if (err) {
+//         console.log("error: ", err);
+//         result(null, err);
+//         return;
+//       }
 
-      console.log("updated customer: ", { id: id, ...customer });
-      result(null, { id: id, ...customer });
-    }
-  );
-};
+//       if (res.affectedRows == 0) {
+//         // not found Customer with the id
+//         result({ kind: "not_found" }, null);
+//         return;
+//       }
 
-Customer.remove = (id, result) => {
-  sql.query("DELETE FROM customers WHERE id = ?", id, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+//       console.log("updated customer: ", { id: id, ...customer });
+//       result(null, { id: id, ...customer });
+//     }
+//   );
+// };
 
-    if (res.affectedRows == 0) {
-      // not found Customer with the id
-      result({ kind: "not_found" }, null);
-      return;
-    }
+// Customer.remove = (id, result) => {
+//   sql.query("DELETE FROM customers WHERE id = ?", id, (err, res) => {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(null, err);
+//       return;
+//     }
 
-    console.log("deleted customer with id: ", id);
-    result(null, res);
-  });
-};
+//     if (res.affectedRows == 0) {
+//       // not found Customer with the id
+//       result({ kind: "not_found" }, null);
+//       return;
+//     }
 
-Customer.removeAll = result => {
-  sql.query("DELETE FROM customers", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+//     console.log("deleted customer with id: ", id);
+//     result(null, res);
+//   });
+// };
 
-    console.log(`deleted ${res.affectedRows} customers`);
-    result(null, res);
-  });
-};
-
-module.exports = Customer;
+module.exports = user;
