@@ -8,7 +8,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "joi": "^14.0.6",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.3.11",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
